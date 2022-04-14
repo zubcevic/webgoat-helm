@@ -1,0 +1,9 @@
+apiVersion: v2
+name: webgoat
+description: WebGoat Learning Environment
+ 
+type: application
+ 
+version: 0.1.0
+ 
+appVersion: "8.2.3-SNAPSHOT"
