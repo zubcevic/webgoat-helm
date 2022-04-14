@@ -17,6 +17,7 @@ https://developers.redhat.com/developer-sandbox
     eval $(crc oc-env)
     oc login -u developer https://api.crc.testing:6443
     oc new-project demo-project
+    crc console
 
 The example without modification uses *demo-project* as the project/namespace for installing WebGoat and WebWolf.
 
@@ -41,7 +42,7 @@ Of course the token here is a fake.
 The URL on a Code Ready Container is build from router name + namespace + default extension .apps-crc.testing:
 
 + [https://webgoat-1-goat-demo-project.apps-crc.testing/WebGoat/login](https://webgoat-1-goat-demo-project.apps-crc.testing/WebGoat/login)
-+ [http://webgoat-1-wolf-demo-project.apps-crc.testing/WebWolf](http://webwolf-1-wolf-demo-project.apps-crc.testing/WebWolf)
++ [http://webgoat-1-wolf-demo-project.apps-crc.testing/WebWolf](http://webgoat-1-wolf-demo-project.apps-crc.testing/WebWolf)
 
 + [http://modsec-1-modsec-demo-project.apps-crc.testing/WebGoat/login](http://modsec-1-modsec-demo-project.apps-crc.testing/WebGoat/login)
 
