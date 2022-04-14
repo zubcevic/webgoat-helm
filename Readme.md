@@ -24,6 +24,7 @@ The example without modification uses *demo-project* as the project/namespace fo
 ## Helm install this example on your local Code Ready Container environment
 
     helm install goat1 ./webgoat
+    helm install modsec1 ./modsec
 
 ## Helm install on single node Developer Sandbox (cloud)
 
@@ -39,16 +40,20 @@ Of course the token here is a fake.
 
 The URL on a Code Ready Container is build from router name + namespace + default extension .apps-crc.testing:
 
-+ [https://webgoat-1-goat-demo-project.apps-crc.testing/WebGoat](https://webgoat-1-goat-demo-project.apps-crc.testing/WebGoat)
-+ [http://webwolf-1-wolf-demo-project.apps-crc.testing/WebWolf](http://webwolf-1-wolf-demo-project.apps-crc.testing/WebWolf)
++ [https://webgoat-1-goat-demo-project.apps-crc.testing/WebGoat/login](https://webgoat-1-goat-demo-project.apps-crc.testing/WebGoat/login)
++ [http://webgoat-1-wolf-demo-project.apps-crc.testing/WebWolf](http://webwolf-1-wolf-demo-project.apps-crc.testing/WebWolf)
+
++ [http://modsec-1-modsec-demo-project.apps-crc.testing/WebGoat/login](http://modsec-1-modsec-demo-project.apps-crc.testing/WebGoat/login)
 
 ## Explanation
 
-deployment.yaml contains two K8S deployment elements. Both use the same Persistent Volume Claim and use the same Volume mapping. 
-They both use the same image but with other entrypoint and command arguments. The java.io.dir is also mapped to this persistent volume mapping. The number of pods is 1 for both WebGoat and WebWolf. WebGoat uses the WEBWOLF_HOST parameter to know where the external address of WebWolf is defined. WebWolf uses WEBGOAT_HOST to define the internal service address to WebGoat for connecting to the HSQL database
+Deployment.yaml describes how the container image is used. It refers to Persistent Volume Claim and use the same Volume mapping. 
+The java.io.dir is also mapped to this persistent volume mapping. The number of pods is set to 1. References from WebGoat to WebWolf are set in the configmap yaml file as environment properties and as container image start up arguments.
 
 persistent-storage-claim.yaml contains the OpenShift K8S extension for requestig a volume with Read-Write access that will survive any pod replacements.
 
 service.yaml defines the service ports for both WebGoat and WebWolf
 
-route-goat defines an https endpoint toward the 8080 port. route-wolf defines an http port towards the 9090 port.
+route-goat defines an https endpoint toward the 8080 port and an http port towards the 9090 port.
+
+Additionally you can install the modsec Helm Chart in the same name space which acts as an application firewall which forwards internally to WebGoat. On the WebGoat through Modsec URL you will not be able to do SQL injection for example.
