@@ -3,6 +3,10 @@ apiVersion: apps/v1
 metadata:
   name: {{ .Values.modsec_server.name }}
   namespace: {{ .Values.namespace }}
+  labels:
+    app.openshift.io/runtime: nginx
+  annotations:
+    app.openshift.io/connects-to: {{ .Values.webgoat_server.name }}
 spec:
   replicas: 1
   selector:
