@@ -11,7 +11,7 @@ data:
   ANOMALYIN: '5'
   ANOMALYOUT: '5'
   ALLOWED_METHODS: 'GET POST'
-  ALLOWED_REQUEST_CONTENT_TYPE: "text/xml|application/xml|text/plain"
+  ALLOWED_REQUEST_CONTENT_TYPE: "application/x-www-form-urlencoded|text/xml|application/xml|text/plain"
   MAX_FILE_SIZE: '5242880'
   PORT: '8001'
   RESTRICTED_EXTENSIONS: '.conf/'
